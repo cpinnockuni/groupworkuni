@@ -6,11 +6,25 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views import View
 from django.contrib.auth.decorators import login_required
 
+
+
+
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
 
 def home(request):
     return render(request, 'users/home.html')
+
+
+
+
+def com(request):
+     
+     test= "This Will be data posting to the users"
+     second_user="This is message from the second user"
+        
+
+     return render(request, 'components/com.html', context= {'test': test})
 
 
 class RegisterView(View):
@@ -79,6 +93,11 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     success_url = reverse_lazy('users-home')
 
 
+
+
+
+
+
 @login_required
 def profile(request):
     if request.method == 'POST':
@@ -95,3 +114,7 @@ def profile(request):
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'users/profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+
+
